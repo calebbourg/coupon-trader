@@ -12,11 +12,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    result = BalanceService.call(@user, params)
-    if result
-    	render json: result, status: 204
+    if params[:balance_change]
+      @result = BalanceService.call(@user, params)
+      if @result.success?
+      	render json: @user, status: 204
+      else
+      	render json: @result.error_messages, status: 422
+      end
     else
-    	render json: @user, status: 200
+      render json: @user, status: 200
     end
   end
 
