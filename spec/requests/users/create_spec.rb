@@ -19,7 +19,6 @@ RSpec.describe 'User create', type: :request do
       expect(response).to have_http_status(422)
       expect(JSON.parse(response.body)).to be_an(Array)
       expect(JSON.parse(response.body)).to include(be_an(String))
-
     end
   end
 
