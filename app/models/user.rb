@@ -2,6 +2,8 @@ class User < ApplicationRecord
 	has_secure_password
 
 	has_many :coupons, dependent: :destroy
+	has_many :poster_transactions, class_name: 'Transaction', foreign_key: 'poster_id'
+	has_many :requester_transactions, class_name: 'Transaction', foreign_key: 'requester_id'
 
 	validates_presence_of :email
 	validates_presence_of :name
