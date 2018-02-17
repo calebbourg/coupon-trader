@@ -7,9 +7,9 @@ RSpec.describe 'Transaction Create' do
   context 'with valid params' do
     it 'creates a new transaction' do
       expect do
-        post "/coupons/#{coupon_id}/transactions", headers: authenticated_header(user), params: { transaction: valid_params }
+        post "/api/v1/coupons/#{coupon_id}/transactions", headers: authenticated_header(user), params: { transaction: valid_params }
       end 
     end
   end
-  it_behaves_like 'secured route', '/coupons/1/transactions', :post, FactoryBot.attributes_for(:transaction)
+  it_behaves_like 'secured route', '/api/v1/coupons/1/transactions', :post, FactoryBot.attributes_for(:transaction)
 end

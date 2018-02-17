@@ -10,7 +10,7 @@ RSpec.describe '/user_token' do
   context 'valid params' do
     
     it 'returns a jwt' do
-      post '/user_token', params: { auth:  valid_params  }
+      post '/api/v1/user_token', params: { auth:  valid_params  }
       expect(response).to be_success
       expect(JSON.parse(response.body)).to include({'jwt' => be_an(String)})
     end
@@ -19,7 +19,7 @@ RSpec.describe '/user_token' do
   context 'invalid params' do
     
     it 'returns an error message' do
-      post '/user_token', params: { auth: invalid_params }
+      post '/api/v1/user_token', params: { auth: invalid_params }
       expect(response).to_not be_success
     end
   end
