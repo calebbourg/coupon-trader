@@ -10,25 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209191719) do
+ActiveRecord::Schema.define(version: 20180218182408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "brands", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "coupon_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["coupon_id"], name: "index_brands_on_coupon_id", using: :btree
-  end
-
   create_table "coupons", force: :cascade do |t|
     t.float    "value",      default: 0.0, null: false
     t.integer  "user_id"
+    t.string   "brand",                    null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "name",                     null: false
     t.index ["user_id"], name: "index_coupons_on_user_id", using: :btree
+  end
+
+  create_table "marketplace_clients", force: :cascade do |t|
+    t.float "revenue", default: 0.0, null: false
   end
 
   create_table "transactions", force: :cascade do |t|

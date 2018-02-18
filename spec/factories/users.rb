@@ -5,5 +5,6 @@ FactoryBot.define do
     email Faker::Internet.email
     password 'password'
     password_confirmation 'password'
+    balance 100
   end
 end

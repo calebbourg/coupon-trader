@@ -12,8 +12,8 @@ module Api
          end
       end
 
-      def update
-        @user = User.find(params[:id])
+      def update_balance
+        @user = current_user
         if params[:balance_change]
           @result = BalanceService.call(@user, params)
           if @result.success?

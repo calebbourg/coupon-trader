@@ -3,6 +3,7 @@ class CreateCoupons < ActiveRecord::Migration[5.0]
     create_table :coupons do |t|
       t.float :value, null: false, default: 0.0
       t.references :user
+      t.string :brand, null: false
 
       t.timestamps
     end

@@ -7,11 +7,15 @@ module Api
         @requester = current_user
         @coupon = Coupon.find(params[:coupon_id])
         @poster = @coupon.user
-        @transaction = Transaction.new(coupon_id: @coupon.id, poster_id: @poster.id, requester_id: @requester.id)
-        if @transaction.save
-        	render json: @transaction, status: 201
+        if @requester.balance >= @coupon.value
+          @result = ::TransactionsService.call(@coupon, @requester, @poster)
+          if @result.status == 'success'
+          	render json: @result.transaction, status: 201
+          else
+          	render json: @result.transaction.errors.full_messages, status: 422
+          end
         else
-        	render json: @transaction.errors.full_messages, status: 422
+          render json: @coupon, status: 422
         end
       end
     end

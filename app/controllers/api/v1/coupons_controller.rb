@@ -12,10 +12,17 @@ module Api
         end
       end
 
+      def index 
+        @user_own_coupons = current_user.coupons
+        @requestable_coupons = Coupon.where.not(user_id: current_user.id)
+        data = { userOwnCoupons: @user_own_coupons, requestableCoupons: @requestable_coupons, userBalance: current_user.balance }.to_json
+        render json: data, status: 200
+      end
+
       private
 
       def coupon_params
-        params.require(:coupon).permit(:value, :brand_id)
+        params.require(:coupon).permit( :name, :value, :brand)
       end
     end
   end
