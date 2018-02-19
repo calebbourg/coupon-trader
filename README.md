@@ -1,8 +1,9 @@
 
 
-bundle install
-bundle exec rake db:create && rake db:migrate
-bundle exec rails s
+ - bundle install
+ - bundle exec rake db:create && rake db:migrate
+ - bundle exec rails s
+ - bundle exec rspec
 
 API for coupon trading
 
@@ -25,3 +26,6 @@ partitioned by ownership
 { userOwnCoupons: [], requestableCoupons: [] }
 
 POST api/v1/coupons/:coupon_id/transactions - will create a transaction transfering ownership of coupon with ID coupon_id to current_user. 5% of coupon value will be added to MarketplaceClient.revenue. The remaining balance is added to coupon poster's account from requesters account.
+
+
+This API is intended to be utilized by a decoupled front-end (React)
